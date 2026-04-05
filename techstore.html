@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechZone — Магазин техніки</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#ff6b00;--accent2:#ff9a3c;--dark:#0f0f11;--dark2:#1a1a1f;--dark3:#242429;--border:rgba(255,255,255,0.08);--text:#f0f0f0;--muted:#888;--green:#22c55e;--card:#17171c}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--dark)}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+.topbar{background:var(--accent);padding:8px 0;text-align:center;font-size:13px;font-weight:600}
+header{background:var(--dark2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:1000}
+.hi{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:16px;height:68px}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:var(--text);cursor:pointer;white-space:nowrap;flex-shrink:0}
+.logo span{color:var(--accent)}
+.sbar{flex:1;display:flex;align-items:center;background:var(--dark3);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .2s}
+.sbar:focus-within{border-color:var(--accent)}
+.sbar input{flex:1;background:none;border:none;outline:none;padding:12px 16px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px}
+.sbar input::placeholder{color:var(--muted)}
+.sbar button{background:var(--accent);border:none;padding:12px 18px;color:#fff;cursor:pointer;font-size:16px;flex-shrink:0}
+.hbtns{display:flex;gap:8px;flex-shrink:0}
+.hbtn{background:none;border:1px solid var(--border);color:var(--text);padding:9px 14px;border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;display:flex;align-items:center;gap:6px;transition:all .2s;position:relative;white-space:nowrap}
+.hbtn:hover{border-color:var(--accent);color:var(--accent)}
+.ccnt{position:absolute;top:-6px;right:-6px;background:var(--accent);color:#fff;font-size:10px;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+nav{background:var(--dark2);border-bottom:1px solid var(--border)}
+.ni{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;overflow-x:auto}
+.ni::-webkit-scrollbar{display:none}
+.nl{padding:13px 15px;color:var(--muted);font-size:14px;font-weight:500;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;font-family:'DM Sans',sans-serif}
+.nl:hover,.nl.active{color:var(--text);border-bottom-color:var(--accent)}
+.page{display:none}.page.active{display:block}
+.hero{background:linear-gradient(135deg,#1a0a00,var(--dark) 50%,#001a2e);padding:70px 24px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(255,107,0,.15),transparent 70%);pointer-events:none}
+.hrow{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.badge2{display:inline-block;background:rgba(255,107,0,.15);color:var(--accent);border:1px solid rgba(255,107,0,.3);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(32px,5vw,60px);font-weight:800;line-height:1.1;margin-bottom:20px}
+.hero h1 span{color:var(--accent)}
+.hero p{color:var(--muted);font-size:16px;line-height:1.7;margin-bottom:32px}
+.hbtns2{display:flex;gap:12px;flex-wrap:wrap}
+.bp{background:var(--accent);color:#fff;border:none;padding:13px 26px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s}
+.bp:hover{background:var(--accent2);transform:translateY(-1px)}
+.bo{background:none;color:var(--text);border:1px solid var(--border);padding:13px 26px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s}
+.bo:hover{border-color:var(--accent);color:var(--accent)}
+.hgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.hcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;text-align:center;cursor:pointer;transition:all .3s}
+.hcard:hover{border-color:var(--accent);transform:translateY(-4px)}
+.hcard:first-child{grid-column:1/-1}
+.hcard .e{font-size:36px;margin-bottom:10px}
+.hcard h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:4px}
+.hcard p{color:var(--muted);font-size:13px}
+.stats{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.si{max-width:1280px;margin:0 auto;padding:28px 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+.sn{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;color:var(--accent)}
+.sl{color:var(--muted);font-size:13px;margin-top:4px}
+.sec{max-width:1280px;margin:0 auto;padding:50px 24px}
+.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+.st{font-family:'Syne',sans-serif;font-size:26px;font-weight:800}
+.st span{color:var(--accent)}
+.sa{color:var(--accent);font-size:14px;font-weight:600;cursor:pointer}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+.ccard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 14px;text-align:center;cursor:pointer;transition:all .25s}
+.ccard:hover{border-color:var(--accent);background:rgba(255,107,0,.05);transform:translateY(-3px)}
+.ccard .e{font-size:30px;margin-bottom:10px}
+.ccard h4{font-size:13px;font-weight:600}
+.ccard p{color:var(--muted);font-size:11px;margin-top:3px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:all .3s;position:relative}
+.pcard:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.pbadge{position:absolute;top:12px;left:12px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;z-index:2}
+.pbadge.new{background:var(--green)}
+.wbtn{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.5);border:none;color:var(--muted);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2}
+.wbtn:hover,.wbtn.on{color:#ff4466}
+.pimg{width:100%;height:170px;display:flex;align-items:center;justify-content:center;font-size:68px;background:linear-gradient(135deg,#1a1a20,#12121a)}
+.pinfo{padding:14px}
+.pbrand{color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.pname{font-size:14px;font-weight:600;line-height:1.4;margin-bottom:8px}
+.prat{display:flex;align-items:center;gap:6px;margin-bottom:10px}
+.stars{color:#fbbf24;font-size:12px}
+.rcnt{color:var(--muted);font-size:11px}
+.ppr{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+.pcur{font-family:'Syne',sans-serif;font-size:19px;font-weight:800}
+.pold{color:var(--muted);font-size:13px;text-decoration:line-through}
+.pdis{background:rgba(255,107,0,.15);color:var(--accent);font-size:11px;font-weight:700;padding:2px 6px;border-radius:4px}
+.atc{width:100%;background:var(--accent);color:#fff;border:none;padding:10px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.atc:hover{background:var(--accent2)}.atc.added{background:var(--green)}
+.clay{display:grid;grid-template-columns:250px 1fr;gap:24px;max-width:1280px;margin:0 auto;padding:28px 24px}
+.fpanel{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;height:fit-content;position:sticky;top:110px}
+.ftit{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.fgrp{margin-bottom:22px}
+.flbl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:10px}
+.fopt{display:flex;align-items:center;gap:10px;padding:7px 0;cursor:pointer;font-size:14px;transition:color .2s}
+.fopt:hover{color:var(--accent)}.fopt input{accent-color:var(--accent);cursor:pointer}
+.pinputs{display:flex;gap:8px;align-items:center}
+.pinput{flex:1;background:var(--dark3);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;transition:border-color .2s}
+.pinput:focus{border-color:var(--accent)}
+.ctbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px}
+.ccnt2{color:var(--muted);font-size:14px}
+.ssort{background:var(--dark3);border:1px solid var(--border);color:var(--text);padding:9px 14px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;cursor:pointer}
+.pplay{max-width:1280px;margin:0 auto;padding:28px 24px;display:grid;grid-template-columns:1fr 1fr;gap:44px}
+.pgal{background:var(--card);border:1px solid var(--border);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:130px;height:420px}
+.bread{color:var(--muted);font-size:13px;max-width:1280px;margin:0 auto;padding:18px 24px 0;display:flex;gap:8px;flex-wrap:wrap}
+.bread span{cursor:pointer}.bread span:hover{color:var(--accent)}
+.pdname{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;line-height:1.2;margin-bottom:14px}
+.pdrat{display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--border)}
+.dprow{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.dpc{font-family:'Syne',sans-serif;font-size:36px;font-weight:800}
+.stock{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--green);margin-bottom:22px}
+.sdot{width:8px;height:8px;background:var(--green);border-radius:50%}
+.pacts{display:flex;gap:12px;margin-bottom:24px}
+.buybtn{flex:1;background:var(--accent);color:#fff;border:none;padding:15px;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.buybtn:hover{background:var(--accent2)}
+.wishbtn{background:none;border:1px solid var(--border);color:var(--text);padding:15px 18px;border-radius:12px;font-size:18px;cursor:pointer;transition:all .2s}
+.wishbtn:hover{border-color:#ff4466;color:#ff4466}
+.srow{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px}
+.sk{color:var(--muted)}.sv{font-weight:500}
+.cartlay{max-width:1280px;margin:0 auto;padding:28px 24px;display:grid;grid-template-columns:1fr 340px;gap:22px}
+.ctit{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:22px}
+.ci{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;display:flex;gap:16px;align-items:center;margin-bottom:12px}
+.ciimg{font-size:46px;width:70px;text-align:center;flex-shrink:0}
+.cii{flex:1}
+.cin{font-size:15px;font-weight:600;margin-bottom:3px}
+.cib{color:var(--muted);font-size:12px}
+.qc{display:flex;align-items:center;gap:10px;margin-top:10px}
+.qb{background:var(--dark3);border:1px solid var(--border);color:var(--text);width:28px;height:28px;border-radius:6px;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.qb:hover{border-color:var(--accent);color:var(--accent)}
+.qn{font-size:15px;font-weight:600;min-width:20px;text-align:center}
+.cip{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;white-space:nowrap}
+.rbtn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:17px;padding:4px;transition:color .2s}
+.rbtn:hover{color:#ff4466}
+.csum{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;height:fit-content;position:sticky;top:110px}
+.csumtit{font-family:'Syne',sans-serif;font-size:19px;font-weight:800;margin-bottom:18px}
+.crow{display:flex;justify-content:space-between;padding:9px 0;font-size:14px;border-bottom:1px solid var(--border)}
+.ctotal{display:flex;justify-content:space-between;padding:14px 0;font-family:'Syne',sans-serif;font-size:20px;font-weight:800;border-top:2px solid var(--accent);margin-top:8px}
+.chkbtn{width:100%;background:var(--accent);color:#fff;border:none;padding:14px;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;margin-top:14px;transition:all .2s}
+.chkbtn:hover{background:var(--accent2)}
+.orlay{max-width:760px;margin:0 auto;padding:28px 24px}
+.ortit{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;margin-bottom:28px}
+.fs{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:18px}
+.fst{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg{display:flex;flex-direction:column;gap:7px}
+.fg.full{grid-column:1/-1}
+.fg label{font-size:13px;font-weight:600;color:var(--muted)}
+.fi{background:var(--dark3);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color .2s}
+.fi:focus{border-color:var(--accent)}
+.popts{display:flex;flex-direction:column;gap:10px}
+.popt{display:flex;align-items:center;gap:12px;padding:13px 15px;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;font-size:14px}
+.popt:hover{border-color:var(--accent);background:rgba(255,107,0,.05)}
+.popt input{accent-color:var(--accent)}
+.apage{min-height:calc(100vh - 130px);display:flex;align-items:center;justify-content:center;padding:40px 24px}
+.acard{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px;width:100%;max-width:420px}
+.atit{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:7px}
+.asub{color:var(--muted);font-size:14px;margin-bottom:24px}
+.atabs{display:flex;background:var(--dark3);border-radius:10px;padding:4px;margin-bottom:24px}
+.atab{flex:1;padding:9px;text-align:center;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;transition:all .2s;color:var(--muted)}
+.atab.active{background:var(--accent);color:#fff}
+.aform{display:flex;flex-direction:column;gap:14px}
+.prlay{max-width:1280px;margin:0 auto;padding:28px 24px;display:grid;grid-template-columns:240px 1fr;gap:22px}
+.prsb{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;height:fit-content}
+.prav{width:76px;height:76px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 14px}
+.prn{text-align:center;font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:4px}
+.pre{text-align:center;color:var(--muted);font-size:13px;margin-bottom:18px}
+.prmenu{display:flex;flex-direction:column;gap:4px}
+.prmi{padding:9px 13px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:500;transition:all .2s;color:var(--muted)}
+.prmi:hover,.prmi.active{background:rgba(255,107,0,.1);color:var(--accent)}
+.ordcard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:12px}
+.ordh{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.ordid{font-size:15px;font-weight:700}
+.ords{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700}
+.ords.ok{background:rgba(34,197,94,.15);color:var(--green)}
+.ords.pend{background:rgba(255,107,0,.15);color:var(--accent)}
+.wpage{max-width:1280px;margin:0 auto;padding:28px 24px}
+.empty{text-align:center;padding:70px 24px}
+.empty .e{font-size:60px;margin-bottom:18px}
+.empty h3{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px}
+.empty p{color:var(--muted);font-size:15px;margin-bottom:22px}
+.toast{position:fixed;bottom:28px;right:28px;background:var(--dark2);border:1px solid var(--accent);color:var(--text);padding:13px 18px;border-radius:12px;font-size:14px;font-weight:500;z-index:9999;transform:translateY(100px);opacity:0;transition:all .3s;max-width:280px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.toast.on{transform:translateY(0);opacity:1}
+footer{background:var(--dark2);border-top:1px solid var(--border);padding:44px 24px 22px;margin-top:60px}
+.fi2{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px}
+.flogo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;margin-bottom:10px}
+.flogo span{color:var(--accent)}
+.fdesc{color:var(--muted);font-size:14px;line-height:1.7}
+.fcol h4{font-weight:700;font-size:14px;margin-bottom:14px}
+.fcol a{display:block;color:var(--muted);font-size:13px;padding:4px 0;cursor:pointer;transition:color .2s}
+.fcol a:hover{color:var(--accent)}
+.fbot{max-width:1280px;margin:0 auto;padding-top:22px;border-top:1px solid var(--border);display:flex;justify-content:space-between;color:var(--muted);font-size:13px}
+@media(max-width:900px){.hrow{grid-template-columns:1fr}.hgrid{display:none}.clay{grid-template-columns:1fr}.fpanel{position:static}.pplay{grid-template-columns:1fr}.cartlay{grid-template-columns:1fr}.prlay{grid-template-columns:1fr}.fi2{grid-template-columns:1fr 1fr}.si{grid-template-columns:repeat(2,1fr)}.fgrid{grid-template-columns:1fr}}
+@media(max-width:600px){.hbtn span{display:none}.fi2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="topbar">🔥 Весняний розпродаж — до -50%! Безкоштовна доставка від 2000 грн</div>
+
+<header>
+  <div class="hi">
+    <div class="logo" id="goHome">Tech<span>Zone</span></div>
+    <div class="sbar">
+      <input type="text" id="searchInput" placeholder="Пошук товарів...">
+      <button id="searchBtn">🔍</button>
+    </div>
+    <div class="hbtns">
+      <button class="hbtn" id="goWish">❤️ <span>Обране</span></button>
+      <button class="hbtn" id="goCart">🛒 <span>Кошик</span><div class="ccnt" id="cartCount">0</div></button>
+      <button class="hbtn" id="goAuth">👤 <span>Увійти</span></button>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="ni">
+    <button class="nl active" data-page="home">🏠 Головна</button>
+    <button class="nl" data-page="catalog" data-cat="all">📦 Каталог</button>
+    <button class="nl" data-page="catalog" data-cat="phone">📱 Смартфони</button>
+    <button class="nl" data-page="catalog" data-cat="laptop">💻 Ноутбуки</button>
+    <button class="nl" data-page="catalog" data-cat="tv">📺 Телевізори</button>
+    <button class="nl" data-page="catalog" data-cat="tablet">📟 Планшети</button>
+    <button class="nl" data-page="catalog" data-cat="audio">🎧 Аудіо</button>
+    <button class="nl" data-page="profile">👤 Кабінет</button>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hrow">
+      <div>
+        <div class="badge2">⚡ Нові надходження 2024</div>
+        <h1>Техніка<br>майбутнього<br><span>вже сьогодні</span></h1>
+        <p>Найкращі смартфони, ноутбуки та побутова техніка. Гарантія якості та швидка доставка по всій Україні.</p>
+        <div class="hbtns2">
+          <button class="bp" id="heroCatalog">Переглянути каталог →</button>
+          <button class="bo" id="heroPhones">📱 Топ смартфони</button>
+        </div>
+      </div>
+      <div class="hgrid">
+        <div class="hcard" id="hc1"><div class="e">📱</div><h3>iPhone 15 Pro</h3><p>від 42 999 грн</p></div>
+        <div class="hcard" id="hc2"><div class="e">💻</div><h3>MacBook Air M3</h3><p>від 52 999 грн</p></div>
+        <div class="hcard" id="hc3"><div class="e">🎧</div><h3>Sony WH-1000XM5</h3><p>від 9 999 грн</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="si">
+      <div><div class="sn">50K+</div><div class="sl">Товарів</div></div>
+      <div><div class="sn">200K+</div><div class="sl">Клієнтів</div></div>
+      <div><div class="sn">4.9★</div><div class="sl">Рейтинг</div></div>
+      <div><div class="sn">24/7</div><div class="sl">Підтримка</div></div>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="sh"><div class="st">Категорії <span>товарів</span></div></div>
+    <div class="cgrid" id="catGrid"></div>
+  </div>
+  <div class="sec" style="padding-top:0">
+    <div class="sh">
+      <div class="st">🔥 <span>Акційні</span> товари</div>
+      <span class="sa" id="seeAll">Всі товари →</span>
+    </div>
+    <div class="pgrid" id="homeProducts"></div>
+  </div>
+</div>
+
+<!-- CATALOG -->
+<div id="page-catalog" class="page">
+  <div class="clay">
+    <div class="fpanel">
+      <div class="ftit">🔧 Фільтри</div>
+      <div class="fgrp">
+        <div class="flbl">Ціна (грн)</div>
+        <div class="pinputs">
+          <input class="pinput" type="number" id="priceMin" placeholder="від">
+          <span style="color:var(--muted)">—</span>
+          <input class="pinput" type="number" id="priceMax" placeholder="до">
+        </div>
+      </div>
+      <div class="fgrp">
+        <div class="flbl">Категорія</div>
+        <label class="fopt"><input type="checkbox" value="phone"> Смартфони</label>
+        <label class="fopt"><input type="checkbox" value="laptop"> Ноутбуки</label>
+        <label class="fopt"><input type="checkbox" value="tv"> Телевізори</label>
+        <label class="fopt"><input type="checkbox" value="tablet"> Планшети</label>
+        <label class="fopt"><input type="checkbox" value="audio"> Аудіо</label>
+      </div>
+      <div class="fgrp">
+        <div class="flbl">Бренд</div>
+        <label class="fopt"><input type="checkbox" value="Apple"> Apple</label>
+        <label class="fopt"><input type="checkbox" value="Samsung"> Samsung</label>
+        <label class="fopt"><input type="checkbox" value="Sony"> Sony</label>
+        <label class="fopt"><input type="checkbox" value="Xiaomi"> Xiaomi</label>
+        <label class="fopt"><input type="checkbox" value="LG"> LG</label>
+      </div>
+      <button class="bp" id="resetBtn" style="width:100%">Скинути фільтри</button>
+    </div>
+    <div>
+      <div class="ctbar">
+        <div class="ccnt2" id="catalogCount">Знайдено: 0 товарів</div>
+        <select class="ssort" id="sortSelect">
+          <option value="popular">За популярністю</option>
+          <option value="price-asc">Ціна: від дешевих</option>
+          <option value="price-desc">Ціна: від дорогих</option>
+          <option value="new">Новинки</option>
+        </select>
+      </div>
+      <div class="pgrid" id="catalogProducts"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT PAGE -->
+<div id="page-product" class="page">
+  <div class="bread">
+    <span id="bHome">🏠 Головна</span> /
+    <span id="bCatalog">Каталог</span> /
+    <span id="bCat">Категорія</span> /
+    <span id="bName" style="color:var(--text)">Товар</span>
+  </div>
+  <div class="pplay">
+    <div class="pgal" id="prodEmoji">📱</div>
+    <div>
+      <div class="pdname" id="prodName"></div>
+      <div class="pdrat">
+        <span class="stars">★★★★★</span>
+        <span style="font-weight:600;font-size:14px">4.9</span>
+        <span style="color:var(--muted);font-size:13px">(248 відгуків)</span>
+      </div>
+      <div class="dprow">
+        <div class="dpc" id="prodPrice"></div>
+        <div class="pold" id="prodOld"></div>
+        <div class="pdis" id="prodDis"></div>
+      </div>
+      <div class="stock" style="margin-top:12px;margin-bottom:22px"><div class="sdot"></div> В наявності</div>
+      <div class="pacts">
+        <button class="buybtn" id="prodBuyBtn">🛒 Додати в кошик</button>
+        <button class="wishbtn" id="prodWishBtn">❤️</button>
+      </div>
+      <div id="prodSpecs"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CART -->
+<div id="page-cart" class="page">
+  <div class="cartlay">
+    <div>
+      <div class="ctit">🛒 Кошик</div>
+      <div id="cartItems"></div>
+    </div>
+    <div class="csum">
+      <div class="csumtit">Підсумок</div>
+      <div class="crow"><span>Товарів</span><span id="sumCount">0</span></div>
+      <div class="crow"><span>Доставка</span><span style="color:var(--green)">Безкоштовно</span></div>
+      <div class="crow"><span>Знижка</span><span style="color:var(--accent)" id="sumDis">-0 грн</span></div>
+      <div class="ctotal"><span>Разом</span><span id="sumTotal">0 грн</span></div>
+      <button class="chkbtn" id="goOrder">Оформити замовлення →</button>
+      <button class="bo" id="cartContinue" style="width:100%;margin-top:8px">← Продовжити покупки</button>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER -->
+<div id="page-order" class="page">
+  <div class="orlay">
+    <div class="ortit">📋 Оформлення замовлення</div>
+    <div class="fs">
+      <div class="fst">👤 Особисті дані</div>
+      <div class="fgrid">
+        <div class="fg"><label>Ім'я</label><input class="fi" placeholder="Павло"></div>
+        <div class="fg"><label>Прізвище</label><input class="fi" placeholder="Козій"></div>
+        <div class="fg"><label>Телефон</label><input class="fi" placeholder="+380 xx xxx xx xx"></div>
+        <div class="fg"><label>Email</label><input class="fi" placeholder="email@example.com"></div>
+      </div>
+    </div>
+    <div class="fs">
+      <div class="fst">🚚 Доставка</div>
+      <div class="fgrid">
+        <div class="fg"><label>Місто</label><input class="fi" placeholder="Луцьк"></div>
+        <div class="fg"><label>Відділення Нової Пошти</label><input class="fi" placeholder="№ відділення"></div>
+        <div class="fg full"><label>Або адреса доставки</label><input class="fi" placeholder="вул. Шевченка, 1"></div>
+      </div>
+    </div>
+    <div class="fs">
+      <div class="fst">💳 Спосіб оплати</div>
+      <div class="popts">
+        <label class="popt"><input type="radio" name="pay" checked> 💳 Оплата карткою онлайн</label>
+        <label class="popt"><input type="radio" name="pay"> 💵 Готівкою при отриманні</label>
+        <label class="popt"><input type="radio" name="pay"> 🔄 Оплата частинами (Monobank)</label>
+      </div>
+    </div>
+    <button class="bp" id="placeOrderBtn" style="width:100%;padding:16px;font-size:15px">✅ Підтвердити замовлення</button>
+  </div>
+</div>
+
+<!-- WISHLIST -->
+<div id="page-wishlist" class="page">
+  <div class="wpage">
+    <div class="st" style="margin-bottom:24px">❤️ Обране</div>
+    <div class="pgrid" id="wishlistProducts"></div>
+    <div id="wishEmpty" class="empty" style="display:none">
+      <div class="e">❤️</div><h3>Список порожній</h3>
+      <p>Додавайте товари в обране, щоб не загубити</p>
+      <button class="bp" id="wishToCatalog">До каталогу</button>
+    </div>
+  </div>
+</div>
+
+<!-- AUTH -->
+<div id="page-auth" class="page">
+  <div class="apage">
+    <div class="acard">
+      <div class="atit">Вітаємо 👋</div>
+      <div class="asub">Увійдіть або зареєструйтесь</div>
+      <div class="atabs">
+        <div class="atab active" id="tabLogin">Вхід</div>
+        <div class="atab" id="tabReg">Реєстрація</div>
+      </div>
+      <div class="aform" id="loginForm">
+        <div class="fg"><label>Email</label><input class="fi" type="email" placeholder="email@example.com"></div>
+        <div class="fg"><label>Пароль</label><input class="fi" type="password" placeholder="••••••••"></div>
+        <button class="bp" id="loginBtn" style="padding:13px">Увійти</button>
+        <div style="text-align:center;color:var(--muted);font-size:13px;cursor:pointer">Забули пароль?</div>
+      </div>
+      <div class="aform" id="regForm" style="display:none">
+        <div class="fg"><label>Ім'я</label><input class="fi" placeholder="Ваше ім'я"></div>
+        <div class="fg"><label>Email</label><input class="fi" type="email" placeholder="email@example.com"></div>
+        <div class="fg"><label>Пароль</label><input class="fi" type="password" placeholder="мін. 8 символів"></div>
+        <button class="bp" id="regBtn" style="padding:13px">Зареєструватись</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div id="page-profile" class="page">
+  <div class="prlay">
+    <div class="prsb">
+      <div class="prav">👤</div>
+      <div class="prn">Павло Козій</div>
+      <div class="pre">pavlo@example.com</div>
+      <div class="prmenu">
+        <div class="prmi active">📦 Мої замовлення</div>
+        <div class="prmi">❤️ Обране</div>
+        <div class="prmi">⚙️ Налаштування</div>
+        <div class="prmi" id="logoutBtn">🚪 Вийти</div>
+      </div>
+    </div>
+    <div>
+      <div class="st" style="margin-bottom:22px">📦 Мої замовлення</div>
+      <div class="ordcard">
+        <div class="ordh">
+          <div><div class="ordid">Замовлення #TZ-10482</div><div style="color:var(--muted);font-size:12px;margin-top:3px">15 березня 2024</div></div>
+          <div class="ords ok">✅ Доставлено</div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;font-size:14px">
+          <span style="font-size:28px">📱</span>
+          <div><div style="font-weight:600">iPhone 15 Pro 256GB</div><div style="color:var(--muted)">1 шт.</div></div>
+          <div style="margin-left:auto;font-family:'Syne';font-size:18px;font-weight:800">42 999 грн</div>
+        </div>
+      </div>
+      <div class="ordcard">
+        <div class="ordh">
+          <div><div class="ordid">Замовлення #TZ-10391</div><div style="color:var(--muted);font-size:12px;margin-top:3px">2 лютого 2024</div></div>
+          <div class="ords pend">🚚 В дорозі</div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;font-size:14px">
+          <span style="font-size:28px">🎧</span>
+          <div><div style="font-weight:600">AirPods Pro 2nd Gen</div><div style="color:var(--muted)">1 шт.</div></div>
+          <div style="margin-left:auto;font-family:'Syne';font-size:18px;font-weight:800">8 499 грн</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fi2">
+    <div><div class="flogo">Tech<span>Zone</span></div><div class="fdesc">Найкращий інтернет-магазин техніки в Україні. Гарантія якості, швидка доставка, офіційна гарантія.</div></div>
+    <div class="fcol"><h4>Покупцям</h4><a>Як зробити замовлення</a><a>Доставка і оплата</a><a>Повернення товару</a><a>Гарантія</a></div>
+    <div class="fcol"><h4>Компанія</h4><a>Про нас</a><a>Вакансії</a><a>Блог</a><a>Контакти</a></div>
+    <div class="fcol"><h4>Контакти</h4><a>📞 0 800 100 500</a><a>✉️ info@techzone.ua</a><a>📍 Луцьк, вул. Шевченка 1</a><a>Пн-Нд: 9:00–21:00</a></div>
+  </div>
+  <div class="fbot"><div>© 2024 TechZone. Всі права захищені.</div><div>Розроблено з ❤️</div></div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var PRODUCTS = [
+  {id:1,name:'iPhone 15 Pro 256GB',brand:'Apple',cat:'phone',e:'📱',price:42999,old:47999,rat:4.9,rev:248,badge:'-10%',isNew:false,specs:{'Екран':'6.1" OLED','Процесор':'A17 Pro','ОЗП':'8 GB',"Пам'ять":'256 GB','Камера':'48 MP','Батарея':'3274 мАг'}},
+  {id:2,name:'Samsung Galaxy S24 Ultra',brand:'Samsung',cat:'phone',e:'📲',price:54999,old:null,rat:4.8,rev:189,badge:'NEW',isNew:true,specs:{'Екран':'6.8" AMOLED','Процесор':'Snapdragon 8 Gen 3','ОЗП':'12 GB',"Пам'ять":'256 GB','Камера':'200 MP','Батарея':'5000 мАг'}},
+  {id:3,name:'MacBook Air M3 13"',brand:'Apple',cat:'laptop',e:'💻',price:52999,old:57999,rat:4.9,rev:312,badge:'-9%',isNew:false,specs:{'Екран':'13.6" Liquid Retina','Процесор':'Apple M3','ОЗП':'8 GB','SSD':'256 GB','Акумулятор':'52.6 Вт·год','Вага':'1.24 кг'}},
+  {id:4,name:'Sony WH-1000XM5',brand:'Sony',cat:'audio',e:'🎧',price:9999,old:12999,rat:4.8,rev:445,badge:'-23%',isNew:false,specs:{'Тип':'Повнорозмірні','ANC':'Так','Bluetooth':'5.2','Час роботи':'30 год','Зарядка':'USB-C','Вага':'250 г'}},
+  {id:5,name:'Samsung QLED 55"',brand:'Samsung',cat:'tv',e:'📺',price:28999,old:34999,rat:4.7,rev:167,badge:'-17%',isNew:false,specs:{'Діагональ':'55"','Роздільна здатність':'4K UHD','Технологія':'QLED','HDR':'HDR10+','Smart TV':'Tizen OS','HDMI':'4×HDMI 2.1'}},
+  {id:6,name:'iPad Pro M4 11"',brand:'Apple',cat:'tablet',e:'📟',price:38999,old:null,rat:4.9,rev:201,badge:'NEW',isNew:true,specs:{'Екран':'11" OLED','Процесор':'Apple M4','ОЗП':'8 GB',"Пам'ять":'256 GB','Камера':'12 MP','Акумулятор':'7606 мАг'}},
+  {id:7,name:'Xiaomi 14 Ultra',brand:'Xiaomi',cat:'phone',e:'📱',price:39999,old:44999,rat:4.7,rev:134,badge:'-11%',isNew:false,specs:{'Екран':'6.73" AMOLED','Процесор':'Snapdragon 8 Gen 3','ОЗП':'16 GB',"Пам'ять":'512 GB','Камера':'50 MP Leica','Батарея':'5000 мАг'}},
+  {id:8,name:'LG OLED 65" C3',brand:'LG',cat:'tv',e:'🖥️',price:64999,old:74999,rat:4.8,rev:89,badge:'-13%',isNew:false,specs:{'Діагональ':'65"','Роздільна здатність':'4K UHD','Технологія':'OLED evo','HDR':'Dolby Vision IQ','Smart TV':'webOS 23','HDMI':'4×HDMI 2.1'}},
+];
+
+var CATS = [
+  {cat:'phone',e:'📱',name:'Смартфони',cnt:'1 240'},
+  {cat:'laptop',e:'💻',name:'Ноутбуки',cnt:'680'},
+  {cat:'tv',e:'📺',name:'Телевізори',cnt:'320'},
+  {cat:'tablet',e:'📟',name:'Планшети',cnt:'290'},
+  {cat:'audio',e:'🎧',name:'Аудіо',cnt:'410'},
+  {cat:'all',e:'⌚',name:'Годинники',cnt:'180'},
+  {cat:'all',e:'🖨️',name:'Оргтехніка',cnt:'140'},
+  {cat:'all',e:'🎮',name:'Ігри',cnt:'560'},
+];
+
+var cart = [];
+var wishlist = [];
+var currentProduct = null;
+var currentCat = 'all';
+var toastTmr;
+
+function fmt(n){ return n.toLocaleString('uk-UA'); }
+
+function toast(msg){
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('on');
+  clearTimeout(toastTmr);
+  toastTmr = setTimeout(function(){ t.classList.remove('on'); }, 2500);
+}
+
+function showPage(name){
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  var pg = document.getElementById('page-'+name);
+  if(!pg) return;
+  pg.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(name==='cart') renderCart();
+  if(name==='wishlist') renderWishlist();
+}
+
+function updateCartCount(){
+  document.getElementById('cartCount').textContent = cart.reduce(function(s,c){return s+c.qty;},0);
+}
+
+function makeCard(p){
+  var inW = wishlist.some(function(w){return w.id===p.id;});
+  var inC = cart.some(function(c){return c.id===p.id;});
+  var stars = '★'.repeat(Math.floor(p.rat))+'☆'.repeat(5-Math.floor(p.rat));
+  var dis = p.old ? Math.round((1-p.price/p.old)*100) : 0;
+  return '<div class="pcard" data-pid="'+p.id+'">'
+    +(p.badge?'<div class="pbadge'+(p.isNew?' new':'')+'">'+(p.badge)+'</div>':'')
+    +'<button class="wbtn'+(inW?' on':'')+'" data-wid="'+p.id+'" title="В обране">❤️</button>'
+    +'<div class="pimg">'+p.e+'</div>'
+    +'<div class="pinfo">'
+    +'<div class="pbrand">'+p.brand+'</div>'
+    +'<div class="pname">'+p.name+'</div>'
+    +'<div class="prat"><span class="stars">'+stars+'</span><span class="rcnt">('+p.rev+')</span></div>'
+    +'<div class="ppr"><span class="pcur">'+fmt(p.price)+' грн</span>'
+    +(p.old?'<span class="pold">'+fmt(p.old)+' грн</span><span class="pdis">-'+dis+'%</span>':'')
+    +'</div>'
+    +'<button class="atc'+(inC?' added':'')+'" data-cid="'+p.id+'">'+(inC?'✅ В кошику':'🛒 Купити')+'</button>'
+    +'</div></div>';
+}
+
+function renderHome(){
+  // categories
+  var cg = document.getElementById('catGrid');
+  if(cg) cg.innerHTML = CATS.map(function(c){
+    return '<div class="ccard" data-gcat="'+c.cat+'"><div class="e">'+c.e+'</div><h4>'+c.name+'</h4><p>'+c.cnt+' товарів</p></div>';
+  }).join('');
+  // sale products
+  var hp = document.getElementById('homeProducts');
+  if(hp) hp.innerHTML = PRODUCTS.filter(function(p){return p.old;}).map(makeCard).join('');
+}
+
+function renderCatalog(list){
+  var el = document.getElementById('catalogProducts');
+  var cnt = document.getElementById('catalogCount');
+  if(!el) return;
+  if(!list.length){
+    el.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="e">🔍</div><h3>Нічого не знайдено</h3><p>Спробуйте змінити фільтри</p></div>';
+  } else {
+    el.innerHTML = list.map(makeCard).join('');
+  }
+  if(cnt) cnt.textContent = 'Знайдено: '+list.length+' товарів';
+}
+
+function getFiltered(){
+  var catVals=['phone','laptop','tv','tablet','audio'];
+  var brandVals=['Apple','Samsung','Sony','Xiaomi','LG'];
+  var cats=[], brands=[];
+  document.querySelectorAll('#page-catalog .fopt input').forEach(function(cb){
+    if(!cb.checked) return;
+    if(catVals.indexOf(cb.value)>=0) cats.push(cb.value);
+    if(brandVals.indexOf(cb.value)>=0) brands.push(cb.value);
+  });
+  var minV=document.getElementById('priceMin').value;
+  var maxV=document.getElementById('priceMax').value;
+  var min=minV?parseFloat(minV):0;
+  var max=maxV?parseFloat(maxV):Infinity;
+  var list=PRODUCTS.slice();
+  if(currentCat!=='all') list=list.filter(function(p){return p.cat===currentCat;});
+  if(cats.length) list=list.filter(function(p){return cats.indexOf(p.cat)>=0;});
+  if(brands.length) list=list.filter(function(p){return brands.indexOf(p.brand)>=0;});
+  return list.filter(function(p){return p.price>=min&&p.price<=max;});
+}
+
+function goToCatalog(cat){
+  currentCat = cat||'all';
+  document.querySelectorAll('#page-catalog .fopt input').forEach(function(cb){cb.checked=false;});
+  document.getElementById('priceMin').value='';
+  document.getElementById('priceMax').value='';
+  document.getElementById('sortSelect').value='popular';
+  showPage('catalog');
+  var list = currentCat==='all'?PRODUCTS.slice():PRODUCTS.filter(function(p){return p.cat===currentCat;});
+  renderCatalog(list);
+}
+
+function openProduct(id){
+  var p=PRODUCTS.find(function(x){return x.id===id;});
+  if(!p) return;
+  currentProduct=p;
+  document.getElementById('prodEmoji').textContent=p.e;
+  document.getElementById('prodName').textContent=p.name;
+  document.getElementById('prodPrice').textContent=fmt(p.price)+' грн';
+  document.getElementById('prodOld').textContent=p.old?fmt(p.old)+' грн':'';
+  document.getElementById('prodDis').textContent=p.old?'-'+Math.round((1-p.price/p.old)*100)+'%':'';
+  document.getElementById('bName').textContent=p.name;
+  var catNames={phone:'Смартфони',laptop:'Ноутбуки',tv:'Телевізори',tablet:'Планшети',audio:'Аудіо'};
+  document.getElementById('bCat').textContent=catNames[p.cat]||'Каталог';
+  document.getElementById('prodSpecs').innerHTML=Object.entries(p.specs).map(function(kv){
+    return '<div class="srow"><span class="sk">'+kv[0]+'</span><span class="sv">'+kv[1]+'</span></div>';
+  }).join('');
+  showPage('product');
+}
+
+function addToCart(id){
+  var p=PRODUCTS.find(function(x){return x.id===id;});
+  if(!p) return;
+  var ex=cart.find(function(c){return c.id===id;});
+  if(ex) ex.qty++;
+  else cart.push({id:p.id,name:p.name,brand:p.brand,e:p.e,price:p.price,old:p.old,qty:1});
+  updateCartCount();
+  document.querySelectorAll('[data-cid="'+id+'"]').forEach(function(b){
+    b.textContent='✅ В кошику'; b.classList.add('added');
+  });
+  toast('✅ '+p.name+' додано в кошик');
+}
+
+function toggleWish(id){
+  var p=PRODUCTS.find(function(x){return x.id===id;});
+  if(!p) return;
+  var idx=wishlist.findIndex(function(w){return w.id===id;});
+  if(idx>=0){
+    wishlist.splice(idx,1);
+    document.querySelectorAll('[data-wid="'+id+'"]').forEach(function(b){b.classList.remove('on');});
+    toast('💔 Видалено з обраного');
+  } else {
+    wishlist.push(p);
+    document.querySelectorAll('[data-wid="'+id+'"]').forEach(function(b){b.classList.add('on');});
+    toast('❤️ Додано в обране');
+  }
+}
+
+function renderCart(){
+  var el=document.getElementById('cartItems');
+  if(!el) return;
+  if(!cart.length){
+    el.innerHTML='<div class="empty"><div class="e">🛒</div><h3>Кошик порожній</h3><p>Додайте товари з каталогу</p><button class="bp" id="emptyCartBtn">До каталогу</button></div>';
+    document.getElementById('sumCount').textContent='0';
+    document.getElementById('sumTotal').textContent='0 грн';
+    document.getElementById('sumDis').textContent='-0 грн';
+    var b=document.getElementById('emptyCartBtn');
+    if(b) b.addEventListener('click',function(){goToCatalog('all');});
+    return;
+  }
+  el.innerHTML=cart.map(function(item){
+    return '<div class="ci">'
+      +'<div class="ciimg">'+item.e+'</div>'
+      +'<div class="cii"><div class="cin">'+item.name+'</div><div class="cib">'+item.brand+'</div>'
+      +'<div class="qc"><button class="qb" data-qid="'+item.id+'" data-d="-1">−</button>'
+      +'<span class="qn">'+item.qty+'</span>'
+      +'<button class="qb" data-qid="'+item.id+'" data-d="1">+</button></div></div>'
+      +'<div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">'
+      +'<div class="cip">'+fmt(item.price*item.qty)+' грн</div>'
+      +'<button class="rbtn" data-rid="'+item.id+'">🗑️</button>'
+      +'</div></div>';
+  }).join('');
+  var sub=cart.reduce(function(s,c){return s+c.price*c.qty;},0);
+  var dis=cart.reduce(function(s,c){return s+(c.old?(c.old-c.price)*c.qty:0);},0);
+  document.getElementById('sumCount').textContent=cart.reduce(function(s,c){return s+c.qty;},0)+' шт.';
+  document.getElementById('sumDis').textContent='-'+fmt(dis)+' грн';
+  document.getElementById('sumTotal').textContent=fmt(sub)+' грн';
+}
+
+function renderWishlist(){
+  var el=document.getElementById('wishlistProducts');
+  var em=document.getElementById('wishEmpty');
+  if(!el) return;
+  if(!wishlist.length){ el.innerHTML=''; em.style.display='block'; }
+  else { em.style.display='none'; el.innerHTML=wishlist.map(makeCard).join(''); }
+}
+
+// ===== ПОДІЇ =====
+// Делегування кліків по карткам
+document.addEventListener('click', function(ev){
+  var t = ev.target;
+
+  // Кнопка "В обране" на картці
+  var wb = t.closest('.wbtn');
+  if(wb){ ev.stopPropagation(); toggleWish(parseInt(wb.dataset.wid)); return; }
+
+  // Кнопка "Купити" на картці
+  var cb = t.closest('.atc');
+  if(cb){ ev.stopPropagation(); addToCart(parseInt(cb.dataset.cid)); return; }
+
+  // Клік по картці — відкрити товар
+  var card = t.closest('.pcard');
+  if(card){ openProduct(parseInt(card.dataset.pid)); return; }
+
+  // Категорія на головній
+  var ccard = t.closest('[data-gcat]');
+  if(ccard){ goToCatalog(ccard.dataset.gcat); return; }
+
+  // Кнопки кількості в кошику
+  var qb = t.closest('.qb');
+  if(qb){
+    var id=parseInt(qb.dataset.qid), d=parseInt(qb.dataset.d);
+    var item=cart.find(function(c){return c.id===id;});
+    if(item){item.qty=Math.max(1,item.qty+d); updateCartCount(); renderCart();}
+    return;
+  }
+
+  // Видалити з кошика
+  var rb = t.closest('.rbtn');
+  if(rb){
+    var id2=parseInt(rb.dataset.rid);
+    cart=cart.filter(function(c){return c.id!==id2;});
+    updateCartCount(); renderCart();
+    toast('🗑️ Товар видалено з кошика');
+    return;
+  }
+});
+
+// Шапка
+document.getElementById('goHome').addEventListener('click',function(){showPage('home');});
+document.getElementById('goWish').addEventListener('click',function(){showPage('wishlist');});
+document.getElementById('goCart').addEventListener('click',function(){showPage('cart');});
+document.getElementById('goAuth').addEventListener('click',function(){showPage('auth');});
+
+// Навігація
+document.querySelectorAll('.nl').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.nl').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    if(btn.dataset.page==='catalog') goToCatalog(btn.dataset.cat||'all');
+    else showPage(btn.dataset.page);
+  });
+});
+
+// Головна кнопки
+document.getElementById('heroCatalog').addEventListener('click',function(){goToCatalog('all');});
+document.getElementById('heroPhones').addEventListener('click',function(){goToCatalog('phone');});
+document.getElementById('hc1').addEventListener('click',function(){goToCatalog('phone');});
+document.getElementById('hc2').addEventListener('click',function(){goToCatalog('laptop');});
+document.getElementById('hc3').addEventListener('click',function(){goToCatalog('audio');});
+document.getElementById('seeAll').addEventListener('click',function(){goToCatalog('all');});
+
+// Товар
+document.getElementById('prodBuyBtn').addEventListener('click',function(){
+  if(currentProduct) addToCart(currentProduct.id);
+});
+document.getElementById('prodWishBtn').addEventListener('click',function(){
+  if(currentProduct){ toggleWish(currentProduct.id); this.style.color='#ff4466'; }
+});
+
+// Хлібні крихти
+document.getElementById('bHome').addEventListener('click',function(){showPage('home');});
+document.getElementById('bCatalog').addEventListener('click',function(){goToCatalog('all');});
+document.getElementById('bCat').addEventListener('click',function(){
+  if(currentProduct) goToCatalog(currentProduct.cat);
+});
+
+// Кошик
+document.getElementById('goOrder').addEventListener('click',function(){showPage('order');});
+document.getElementById('cartContinue').addEventListener('click',function(){goToCatalog('all');});
+
+// Замовлення
+document.getElementById('placeOrderBtn').addEventListener('click',function(){
+  cart=[]; updateCartCount();
+  toast('🎉 Замовлення оформлено! Очікуйте дзвінка.');
+  setTimeout(function(){showPage('profile');},600);
+});
+
+// Обране
+document.getElementById('wishToCatalog').addEventListener('click',function(){goToCatalog('all');});
+
+// Авторизація
+document.getElementById('tabLogin').addEventListener('click',function(){
+  this.classList.add('active');
+  document.getElementById('tabReg').classList.remove('active');
+  document.getElementById('loginForm').style.display='flex';
+  document.getElementById('regForm').style.display='none';
+});
+document.getElementById('tabReg').addEventListener('click',function(){
+  this.classList.add('active');
+  document.getElementById('tabLogin').classList.remove('active');
+  document.getElementById('regForm').style.display='flex';
+  document.getElementById('loginForm').style.display='none';
+});
+document.getElementById('loginBtn').addEventListener('click',function(){showPage('profile');toast('✅ Успішний вхід!');});
+document.getElementById('regBtn').addEventListener('click',function(){showPage('profile');toast('🎉 Акаунт створено!');});
+document.getElementById('logoutBtn').addEventListener('click',function(){showPage('auth');});
+
+// Фільтри
+document.querySelectorAll('#page-catalog .fopt input').forEach(function(cb){
+  cb.addEventListener('change',function(){renderCatalog(getFiltered());});
+});
+document.getElementById('priceMin').addEventListener('input',function(){renderCatalog(getFiltered());});
+document.getElementById('priceMax').addEventListener('input',function(){renderCatalog(getFiltered());});
+document.getElementById('resetBtn').addEventListener('click',function(){goToCatalog('all');});
+
+// Сортування
+document.getElementById('sortSelect').addEventListener('change',function(){
+  var list=getFiltered(), v=this.value;
+  if(v==='price-asc') list.sort(function(a,b){return a.price-b.price;});
+  else if(v==='price-desc') list.sort(function(a,b){return b.price-a.price;});
+  else if(v==='new') list=list.filter(function(p){return p.isNew;}).concat(list.filter(function(p){return !p.isNew;}));
+  renderCatalog(list);
+});
+
+// Пошук
+document.getElementById('searchBtn').addEventListener('click',function(){
+  var v=document.getElementById('searchInput').value.trim();
+  if(!v) return;
+  var res=PRODUCTS.filter(function(p){
+    return p.name.toLowerCase().indexOf(v.toLowerCase())>=0||p.brand.toLowerCase().indexOf(v.toLowerCase())>=0;
+  });
+  currentCat='all';
+  showPage('catalog');
+  renderCatalog(res);
+});
+document.getElementById('searchInput').addEventListener('keydown',function(e){
+  if(e.key==='Enter') document.getElementById('searchBtn').click();
+});
+
+// СТАРТ
+renderHome();
+renderCatalog(PRODUCTS.slice());
+</script>
+</body>
+</html>
